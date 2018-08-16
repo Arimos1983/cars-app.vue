@@ -22,7 +22,10 @@
             <td>{{car.isAutomatic ? "Automatic" : "Manual"}}</td><br>
             <td>{{car.engine}}</td><br>
             <td>{{car.numberOfDoors}}</td><br>
-
+            <td>
+              <router-link :to="{ name: 'edit', params:{ id: car.id}}"><button class="btn btn-primary">Edit</button></router-link>
+            <td><button class="btn btn-primary">Delete</button></td><br>
+            
         </tr>
         </table>
   </div>

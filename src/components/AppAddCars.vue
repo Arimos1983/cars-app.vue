@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="addCar" @reset="reset" >
+  <form @submit.prevent="onSubmit" @reset="reset" >
       <div class="form-group row">
         <label for="brand" class="col-4 col-form-label">Brand</label>
         <div class="col-8">
@@ -77,6 +77,7 @@
 <script>
 import { cars } from '../services/CarsService'
 export default {
+
   data()
   {
       return {
@@ -85,21 +86,50 @@ export default {
           
       }
   },
+
   created(){
-       for(var i = 1990; i <= 2018; i++){
-           this.years.push(i);
-       }
+    for(var i = 1990; i <= 2018; i++)
+    {
+      this.years.push(i);
+    }
+
+    this.$route.params.id && cars.get(this.$route.params.id)
+      .then((response) => {
+      this.car = response.data
+      })
    },
+
   methods: {
+
+
+    onSubmit () 
+    {
+      if (this.car.id) 
+      {
+        this.editCar()
+      } 
+      else 
+      {
+        this.addCar()
+      }
+    },
+
     addCar(){
-      cars
-      .add(this.car)
+      cars.add(this.car)
       .then(response =>{
         this.$router.push('/cars')
       })
       .catch(err => console.log(err))
-
     },
+
+    editCar() {
+      cars.edit(this.car)
+        .then((success) => {
+          this.redirectCars()
+        })
+        .catch((error) => {console.log(error)})
+    },
+
     preview()
     {
       alert(`
@@ -113,12 +143,18 @@ export default {
         `
         )
     },
+
     reset () {
         this.car =  this.defaultCar()
     },
+
     defaultCar(){
       return {brand:'', model:'',maxSpeed: '',year:'', isAutomatic: '',numberOfDoors:'', engine: ''}
-    }
+    },
+    redirectCars () {
+      this.$router.push({ name: 'cars' })
+    },
+
   }
 }
 </script>

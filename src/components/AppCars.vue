@@ -24,7 +24,7 @@
             <td>{{car.numberOfDoors}}</td><br>
             <td>
               <router-link :to="{ name: 'edit', params:{ id: car.id}}"><button class="btn btn-primary">Edit</button></router-link>
-            <td><button class="btn btn-primary">Delete</button></td><br>
+            <td><button @click="deleteCar(car)" class="btn btn-primary">Delete</button></td><br>
             
         </tr>
         </table>
@@ -48,6 +48,16 @@ export default {
             vm.cars = response.data
           })
       })
+  },
+  methods: {
+    deleteCar(car)
+    {
+      cars.deleteCar(car.id)
+       .then((success) => {
+          this.cars = this.cars.filter(c => c !== car)
+        })
+    }
+    
   }
 }
 </script>

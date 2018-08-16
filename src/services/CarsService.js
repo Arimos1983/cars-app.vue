@@ -14,8 +14,12 @@ export default class Cars {
     add(car) {
         return axios.post('cars', car )
     }
-    edit (car) {
+    edit(car){
         return axios.put(`cars/${car.id}`, car)
+    }
+    deleteCar(id)
+    {
+        return axios.delete(`cars/${id}`)
     }
 }
 

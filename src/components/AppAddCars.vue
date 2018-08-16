@@ -124,10 +124,10 @@ export default {
 
     editCar() {
       cars.edit(this.car)
-        .then((success) => {
-          this.redirectCars()
-        })
-        .catch((error) => {console.log(error)})
+        .then(response =>{
+        this.$router.push('/cars')
+      })
+      .catch(err => console.log(err))
     },
 
     preview()
@@ -151,9 +151,7 @@ export default {
     defaultCar(){
       return {brand:'', model:'',maxSpeed: '',year:'', isAutomatic: '',numberOfDoors:'', engine: ''}
     },
-    redirectCars () {
-      this.$router.push({ name: 'cars' })
-    },
+    
 
   }
 }

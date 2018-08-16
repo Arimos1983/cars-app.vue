@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="addCar">
+  <form @submit.prevent="addCar" @reset="reset" >
       <div class="form-group row">
         <label for="brand" class="col-4 col-form-label">Brand</label>
         <div class="col-8">
@@ -42,8 +42,6 @@
           </div>
         </div>
       </div>
-      
-     
       <div class="form-group row">
         <label for="model" class="col-4 col-form-label">Automatic</label>
         <div class="col-8">
@@ -69,6 +67,8 @@
       <div class="form-group row">
         <div class="offset-4 col-8">
           <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+          <button name="reset" type="reset" class="btn btn-primary">Reset</button>
+          <button @click="preview" type="button" class="btn btn-primary">Preview</button>
         </div>
       </div>
     </form>
@@ -81,7 +81,7 @@ export default {
   {
       return {
           years: [],
-          car: {model:'', brand:'', year:'',isAutomatic: '', engine: ''}
+          car: {brand:'', model:'',maxSpeed: '',year:'', isAutomatic: '',numberOfDoors:'', engine: ''}
           
       }
   },
@@ -91,16 +91,34 @@ export default {
        }
    },
   methods: {
-      addCar(){
-          cars
+    addCar(){
+      cars
       .add(this.car)
       .then(response =>{
         this.$router.push('/cars')
       })
       .catch(err => console.log(err))
 
-
-      }
+    },
+    preview()
+    {
+      alert(`
+        ${this.car.brand}
+        ${this.car.model}
+        ${this.car.year}
+        ${this.car.numberOfDoors}
+        ${this.car.maxSpeed}
+        ${this.car.isAutomatic ? 'Automatic ': 'Manual'}
+        ${this.car.engine}
+        `
+        )
+    },
+    reset () {
+        this.car =  this.defaultCar()
+    },
+    defaultCar(){
+      return {brand:'', model:'',maxSpeed: '',year:'', isAutomatic: '',numberOfDoors:'', engine: ''}
+    }
   }
 }
 </script>

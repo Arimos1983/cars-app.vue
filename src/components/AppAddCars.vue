@@ -4,7 +4,7 @@
         <label for="brand" class="col-4 col-form-label">Brand</label>
         <div class="col-8">
           <div class="input-group">
-            <input id="brand" name="brand" type="text" required="required" class="form-control here" v-model="car.brand">
+            <input id="brand" name="brand" type="text" required="required" minlength="2" class="form-control here" v-model="car.brand">
           </div>
         </div>
       </div>
@@ -12,7 +12,7 @@
         <label for="model" class="col-4 col-form-label">Model</label>
         <div class="col-8">
           <div class="input-group">
-            <input id="model" name="model" type="text" required="required" class="form-control here" v-model="car.model">
+            <input id="model" name="model" type="text" required="required" minlength="2" class="form-control here" v-model="car.model">
           </div>
         </div>
       </div>
@@ -29,7 +29,7 @@
         <label for="model" class="col-4 col-form-label">Number of doors</label>
         <div class="col-8">
           <div class="input-group">
-            <input type="number" placeholder="number of doors..." class="form-control here" v-model="car.numberOfDoors"><br>
+            <input type="number" required="required" placeholder="number of doors..." class="form-control here" v-model="car.numberOfDoors"><br>
           </div>
         </div>
       </div>
@@ -56,10 +56,10 @@
         <label for="model" class="col-4 col-form-label">Engine</label>
         <div class="col-8">
           <div class="input-group">
-            <input type="radio" name="engine" value="Disel" v-model="car.engine" >Disel<br>
-            <input type="radio" name="engine" value="Petrol" v-model="car.engine">Petrol<br>
-            <input type="radio" name="engine" value="Electric" v-model="car.engine">Electric<br>
-            <input type="radio" name="engine" value="Hybrid" v-model="car.engine">Hybrid<br>
+            <input type="radio" required="required" name="engine" value="Disel" v-model="car.engine" >Disel<br>
+            <input type="radio" required="required" name="engine" value="Petrol" v-model="car.engine">Petrol<br>
+            <input type="radio" required="required" name="engine" value="Electric" v-model="car.engine">Electric<br>
+            <input type="radio" required="required" name="engine" value="Hybrid" v-model="car.engine">Hybrid<br>
           </div>
         </div>
       </div>
